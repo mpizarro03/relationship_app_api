@@ -1,7 +1,8 @@
 const express = require('express')
 const app = express()
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3001
 const bodyParser = require('body-parser')
+const cors = require('cors')
 
 const authRoutes = require('./routes/auth')
 const usersRoutes = require('./routes/users')
@@ -14,6 +15,7 @@ app.disable('x-powered-by')
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'))
 app.use(bodyParser.json())
 
+app.use(cors())
 app.use('/api/auth',authRoutes)
 app.use('/api/users',usersRoutes)
 app.use('/api/couples',authRoutes)

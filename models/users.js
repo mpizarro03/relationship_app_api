@@ -1,5 +1,4 @@
-const users = [{id:1, name:"Test User"}]
-
+const knex = require('../knex')
 
 const getUser = (id)=> {
   const user = users.find(user => {
@@ -10,9 +9,19 @@ const getUser = (id)=> {
   return user
 }
 
-
+const createUser = (user) => {
+  return knex('users')
+    .insert(user)
+    .then(function(data){
+      return data
+    })
+    .catch((err)=> {
+      return err
+    })
+}
 
 
 module.exports = {
-  getUser
+  getUser,
+  createUser
 }
