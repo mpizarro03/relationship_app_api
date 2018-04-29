@@ -4,7 +4,6 @@ const port = process.env.PORT || 3001
 const bodyParser = require('body-parser')
 const cors = require('cors')
 
-const authRoutes = require('./routes/auth')
 const usersRoutes = require('./routes/users')
 const couplesRoutes = require('./routes/couples')
 const feelingsRoutes = require('./routes/feelings')
@@ -16,10 +15,9 @@ if (process.env.NODE_ENV === 'development') app.use(morgan('dev'))
 app.use(bodyParser.json())
 
 app.use(cors())
-app.use('/api/auth',authRoutes)
 app.use('/api/users',usersRoutes)
-app.use('/api/couples',authRoutes)
-app.use('/api/feelings',couplesRoutes)
+app.use('/api/couples',couplesRoutes)
+app.use('/api/feelings',feelingsRoutes)
 app.use('/api/received_scores',receivedScoresRoutes)
 app.use('/api/sent_scores',sentScoresRoutes)
 
