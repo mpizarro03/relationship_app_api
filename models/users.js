@@ -20,8 +20,20 @@ const createUser = (user) => {
     })
 }
 
+const deleteUser = (userEmail) => {
+    return knex('users')
+      .where('email', userEmail)
+      .del()
+      .then(function(data){
+        return data
+      })
+      .catch((err)=> {
+        return err
+      })
+}
 
 module.exports = {
   getUser,
-  createUser
+  createUser,
+  deleteUser,
 }

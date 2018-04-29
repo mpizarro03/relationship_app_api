@@ -19,7 +19,18 @@ const createUser = (req, res, next) => {
 }
 
 
+const deleteUser = (req, res, next) => {
+  const userEmail = req.body.email
+  model.deleteUser(userEmail).then( data => {
+    if (data) {
+      res.send( { message: 'User successfully deleted' } )
+    } else {
+    res.send( { message: 'User does not exists' } )
+    }
+  })
+}
 
 module.exports = {
   createUser,
+  deleteUser
 }
