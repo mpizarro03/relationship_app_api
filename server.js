@@ -10,9 +10,11 @@ const feelingsRoutes = require('./routes/feelings')
 const receivedScoresRoutes = require('./routes/received_scores')
 const sentScoresRoutes = require('./routes/sent_scores')
 
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+
 app.disable('x-powered-by')
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'))
-app.use(bodyParser.json())
 
 app.use(cors())
 app.use('/api/users',usersRoutes)
