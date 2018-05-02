@@ -1,17 +1,21 @@
 const knex = require('../knex')
 
 
-const getScores = (id)=> {
-  return knex('sent_scores')
-  .where('id', id)
-  .first()
-  .then( (score)=> {
-    if (!score) return { status: 404, errors: `Could not find user sent scores` }
+const getScores = (user_id,is_loved)=> {
+  return knex.select('score', 'feedback', 'description', 'created_at').from('scores')
+  .where({from_user_id: user_id})
+  .join('users_feelings','users_feelings.id', 'scores.users_feelings_id')
+  .join('feelings','users_feelings.feeling_id', 'feelings.id')
+  .then( (scores)=> {
+    if (!scores) {
+      return { status: 404, errors: `Could not find scores that the user has sent` }
+    }
 
-  return user
+    return scores
 
   })
 }
+
 module.exports = {
   getScores
 }

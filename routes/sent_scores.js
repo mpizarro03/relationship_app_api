@@ -1,9 +1,9 @@
 const express = require('express')
-const router = express.Router()
+const router = express.Router({mergeParams:true})
 const ctrl = require('../controller/sent_scores')
 
-router.get('/users/:id/sent_scores/:type', ctrl.getScores)
-router.post('/users/:id/sent_scores/:type', ctrl.createScores)
+router.get('/:type', ctrl.getScores)
+router.post('/:type', ctrl.createScores)
 
 
 module.exports = router
