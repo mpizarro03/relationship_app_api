@@ -19,9 +19,9 @@ if (process.env.NODE_ENV === 'development') app.use(morgan('dev'))
 app.use(cors())
 app.use('/api/users',usersRoutes)
 app.use('/api/couples',couplesRoutes)
-app.use('/api/feelings',feelingsRoutes)
-app.use('/api/received_scores',receivedScoresRoutes)
-app.use('/api/sent_scores',sentScoresRoutes)
+app.use('/api/users/:user_id/feelings',feelingsRoutes)
+app.use('/api/users/:user_id/received_scores',receivedScoresRoutes)
+app.use('/api/users/:user_id/sent_scores',sentScoresRoutes)
 
 app.use((err, req, res, next) => {
   const status = err.status || 500
