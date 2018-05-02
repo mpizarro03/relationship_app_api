@@ -3,7 +3,7 @@ const router = express.Router()
 const ctrl = require('../controller/couples')
 
 router.post('/', ctrl.createCouple)
-router.delete('/', ctrl.deleteCouple)
+router.delete('/:id', ctrl.deleteCouple)
 
 
 module.exports = router
