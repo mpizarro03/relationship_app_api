@@ -1,34 +1,29 @@
 const knex = require('../knex')
 
-const createFeelings = (user1,user2) => {
-  return knex('couples')
-    .insert(couple)
-    .then(function(data){
-      return data
-    })
-    .catch((err)=> {
-      return err
-    })
+const getFeelings = (user_id,is_loved)=> {
+  return knex('users_feelings')
+  .where({user_id: user_id, is_loved: is_loved})
+  .join('feelings',"feeling_id", "feelings.id")
+  .then( (feelings)=> {
+    if (!feelings) {
+      return { status: 404, errors: `Could not find user feelings` }
+    }
+
+    return feelings
+
+  })
 }
 
-const deleteFeelings = (couple) => {
-    return knex('couples')
-      .where('email', userEmail)
-      .del()
-      .then(function(data){
-        return data
-      })
-      .catch((err)=> {
-        return err
-      })
-}
-
-const updateFeelings = () => {
-
-}
+// const createFeelings = (user1,user2) => {
+// }
+//
+//
+// const updateFeelings = () => {
+//
+// }
 
 module.exports = {
-  createFeelings,
-  deleteFeelings,
-  updateFeelings
+  getFeelings,
+  // createFeelings,
+  // updateFeelings
 }

@@ -1,12 +1,12 @@
 const express = require('express')
-const router = express.Router()
+const router = express.Router({mergeParams:true})
 const ctrl = require('../controller/feelings')
 
-router.get('/users/:id/feelings/:type', ctrl.getFeelings)
+router.get('/:type', ctrl.getFeelings)
 
-router.post('/users/:id/feelings/:type', ctrl.createFeelings)
+// router.post('/:type', ctrl.createFeelings)
 
-router.patch('/users/:id/feelings/:type', ctrl.updateFeelings)
+// router.patch('/:type', ctrl.updateFeelings)
 
 
 
