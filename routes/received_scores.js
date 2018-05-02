@@ -1,8 +1,8 @@
 const express = require('express')
-const router = express.Router()
+const router = express.Router({mergeParams:true})
 const ctrl = require('../controller/received_scores')
 
-router.get('/users/:id/received_scores/:type', ctrl.getScores)
+router.get('/:type', ctrl.getScores)
 
 
 module.exports = router

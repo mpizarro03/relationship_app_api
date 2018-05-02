@@ -1,14 +1,17 @@
 const knex = require('../knex')
 
 
-const getScores = (id)=> {
-  return knex('received_scores')
-  .where('id', id)
-  .first()
-  .then( (score)=> {
-    if (!score) return { status: 404, errors: `Could not find user received scores` }
+const getScores = (user_id,is_loved)=> {
+  return knex.select('user_id','score', 'feedback', 'description').from('scores')
+  .where({to_user_id: user_id})
+  .join('users_feelings',"users_feelings.id", "scores.users_feelings_id")
+  .join('feelings',"users_feelings.feeling_id", "feelings.id")
+  .then( (scores)=> {
+    if (!scores) {
+      return { status: 404, errors: `Could not find user scores` }
+    }
 
-  return user
+    return scores
 
   })
 }
