@@ -1,6 +1,6 @@
 const knex = require('../knex')
 
-const createCouple = (user1,user2) => {
+const createCouple = (couple) => {
   return knex('couples')
     .insert(couple)
     .then(function(data){
@@ -11,9 +11,9 @@ const createCouple = (user1,user2) => {
     })
 }
 
-const deleteCouple = (couple) => {
+const deleteCouple = (couple_id) => {
     return knex('couples')
-      .where('email', userEmail)
+      .where('id', couple_id)
       .del()
       .then(function(data){
         return data
