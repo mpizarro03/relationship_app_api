@@ -20,5 +20,10 @@ exports.seed = function(knex, Promise) {
         {id: 13, description: 'Stonewalling', is_loved: false, order:6},
         {id: 14, description: 'Defensive', is_loved: false, order:7},
       ]);
-    });
+    })
+    .then(() => {
+      return knex.raw(
+        "SELECT setval('feelings_id_seq', (SELECT MAX(id) FROM feelings));"
+      );
+    })
 };

@@ -38,5 +38,10 @@ exports.seed = function(knex, Promise) {
         {id: 28, couple_id: 1, from_user_id: 2 , to_user_id: 1, users_feelings_id:14, score: 7, feedback: "lorem ipsum" },
       ]);
     })
+    .then(() => {
+      return knex.raw(
+        "SELECT setval('scores_id_seq', (SELECT MAX(id) FROM scores));"
+      );
+    });
 
 };
