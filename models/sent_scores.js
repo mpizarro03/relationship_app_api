@@ -16,6 +16,17 @@ const getScores = (user_id,is_loved)=> {
   })
 }
 
+const createScores = (scores) => {
+  return knex('scores')
+    .insert(scores)
+    .returning('*')
+    .then((result) => {
+      return result
+    })
+
+}
+
 module.exports = {
-  getScores
+  getScores,
+  createScores
 }
